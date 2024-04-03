@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+set -x
 
 ver="v0.3.1"
 curl -L -o ./AmlImg https://github.com/hzyitc/AmlImg/releases/download/$ver/AmlImg_${ver}_linux_amd64
@@ -9,8 +9,8 @@ chmod +x ./AmlImg
 curl -L -o ./uboot.img https://github.com/hzyitc/u-boot-onecloud/releases/download/build-20221028-0940/eMMC.burn.img
 ./AmlImg unpack ./uboot.img burn/
 echo "::endgroup::"
-gunzip -k openwrt/bin/targets/*/*/*.gz
-diskimg=$(ls openwrt/bin/targets/*/*/*.img)
+gunzip -k openwrt/bin/targets/*/*/*ext4-sdcard.img.gz
+diskimg=$(ls openwrt/bin/targets/*/*/*ext4-sdcard.img)
 loop=$(sudo losetup --find --show --partscan $diskimg)
 img_ext="openwrt.img"
 img_mnt="xd"
@@ -48,7 +48,7 @@ cat <<EOF >>burn/commands.txt
 PARTITION:boot:sparse:boot.simg
 PARTITION:rootfs:sparse:rootfs.simg
 EOF
-prefix=$(ls openwrt/bin/targets/*/*/*.img | sed 's/sdcard.img$/emmc/')
+prefix=$(ls openwrt/bin/targets/*/*/*ext4-sdcard.img | sed 's/sdcard.img$/emmc/')
 burnimg=${prefix}.img
 ./AmlImg pack $burnimg burn/
 

@@ -47,9 +47,9 @@ define Device/Default
   KERNEL_NAME := Image
   KERNEL_DEPENDS = $$(wildcard $(DTS_DIR)/$$(DEVICE_DTS).dts)
   KERNEL := kernel-bin | uImage-meson none
-  FILESYSTEMS := ext4
-  IMAGES := sdcard.img
-  IMAGE/sdcard.img := sdcard-img $$(DEVICE_NAME)
+  #FILESYSTEMS := ext4
+  IMAGES := sdcard.img.gz
+  IMAGE/sdcard.img.gz := sdcard-img $$(DEVICE_NAME) | append-metadata | gzip
 endef
 
 define Device/thunder-onecloud
