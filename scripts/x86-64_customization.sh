@@ -10,4 +10,7 @@ CONFIG_CRYPTO_POLY1305_X86_64=y
 
 source ./01_customize_packages.sh
 
+# 修改默认IP
+sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
+
 exit 0
