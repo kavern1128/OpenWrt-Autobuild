@@ -15,11 +15,11 @@ on:
       targets:
         description: 'target devices'
         required: true
-        default: "['meson-meson8b', 'x86-64']"
+        default: "['x86-64']"
         type: choice
         options:
         - "['meson-meson8b']"
-        - "['meson-meson8b', 'x86-64']"
+        - "['x86-64']"
 
 jobs:
   build:
